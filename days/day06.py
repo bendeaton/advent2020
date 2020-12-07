@@ -1,5 +1,6 @@
 # https://adventofcode.com/2020/day/6
 
+from collections import Counter
 from itertools import groupby
 from typing import List
 
@@ -21,6 +22,18 @@ def main():
         chars = sorted(answers.replace(" ", ""))
         part1 += len(list(groupby(chars)))
         part2 += sum([len(list(v)) == num_ppl for _, v in groupby(chars)])
+
+    print(f"Part 1: {part1}")
+    print(f"Part 2: {part2}")
+
+    # Using collections.Counter
+    part1 = 0
+    part2 = 0
+    for answers in groups_of_answers:
+        num_ppl = len(answers.split(" "))
+        chars = Counter(answers.replace(" ", ""))
+        part1 += len(chars)
+        part2 += sum([v == num_ppl for _, v in chars.items()])
 
     print(f"Part 1: {part1}")
     print(f"Part 2: {part2}")
