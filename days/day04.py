@@ -1,3 +1,4 @@
+from functools import partial
 import re
 from typing import Dict, List
 
@@ -18,16 +19,9 @@ def is_year_valid(x: str, lo: int, hi: int) -> bool:
     return False
 
 
-def is_byr_valid(x: str) -> bool:
-    return is_year_valid(x, 1920, 2002)
-
-
-def is_iyr_valid(x: str) -> bool:
-    return is_year_valid(x, 2010, 2020)
-
-
-def is_eyr_valid(x: str) -> bool:
-    return is_year_valid(x, 2020, 2030)
+is_byr_valid = partial(is_year_valid, lo=1920, hi=2002)
+is_iyr_valid = partial(is_year_valid, lo=2010, hi=2020)
+is_eyr_valid = partial(is_year_valid, lo=2020, hi=2030)
 
 
 def is_hgt_valid(x: str) -> bool:
