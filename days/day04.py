@@ -13,10 +13,7 @@ def load_as_dicts(fname: str) -> List[Dict[str, str]]:
 
 
 def is_year_valid(x: str, lo: int, hi: int) -> bool:
-    if re.fullmatch(r"^^(\d{4})$", x):
-        if lo <= int(x) <= hi:
-            return True
-    return False
+    return bool(re.fullmatch(r"^^(\d{4})$", x)) and lo <= int(x) <= hi
 
 
 is_byr_valid = partial(is_year_valid, lo=1920, hi=2002)
@@ -37,7 +34,7 @@ def is_hgt_valid(x: str) -> bool:
 
 
 def is_hcl_valid(x: str) -> bool:
-    return True if re.fullmatch(r"^#[0-9a-f]{6}$", x) else False
+    return bool(re.fullmatch(r"^#[0-9a-f]{6}$", x))
 
 
 def is_ecl_valid(x: str) -> bool:
@@ -45,7 +42,7 @@ def is_ecl_valid(x: str) -> bool:
 
 
 def is_pid_valid(x: str) -> bool:
-    return True if re.fullmatch(r"^[\d]{9}$", x) else False
+    return bool(re.fullmatch(r"^[\d]{9}$", x))
 
 
 def is_valid_naive(passport: Dict[str, str]) -> bool:
